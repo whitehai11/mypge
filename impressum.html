@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Impressum — Maro Elias Goth</title>
+    <meta name="robots" content="index,follow" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="container" style="align-items:stretch; max-width: 800px;">
+        <h1 class="name" style="margin-bottom:.5rem"><span class="gradient-text">Impressum</span></h1>
+        <section class="card" style="text-align:left; line-height:1.7;">
+          <h2 style="margin:0 0 .5rem 0; font-size:1.1rem">Angaben gemäß § 5 TMG</h2>
+          <p>E-Mail: <a href="mailto:mail@mgoth.de">mail@mgoth.de</a></p>
+
+
+          <h3 style="margin:1rem 0 .4rem 0; font-size:1rem">Vertreten durch</h3>
+          <p>Maro Elias Goth (private Website, keine kommerzielle Nutzung)</p>
+
+          <h3 style="margin:1rem 0 .4rem 0; font-size:1rem">Kontakt</h3>
+          <p>E‑Mail: <a href="mailto:mail@mgoth.de">mail@mgoth.de</a></p>
+
+          <h3 style="margin:1rem 0 .4rem 0; font-size:1rem">Haftung für Inhalte</h3>
+          <p>Als Diensteanbieter bin ich gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+
+          <h3 style="margin:1rem 0 .4rem 0; font-size:1rem">Haftung für Links</h3>
+          <p>Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+          <h3 style="margin:1rem 0 .4rem 0; font-size:1rem">Urheberrecht</h3>
+          <p>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet.</p>
+
+          <p class="muted" style="margin-top:1rem; color:#aee7df">Stand: <span id="d"></span></p>
+        </section>
+
+        <footer class="footer">
+          <p>© <span id="y"></span> Maro • <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a> • <a href="index.html">Zurück</a></p>
+        </footer>
+      </div>
+    </main>
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+      document.getElementById('d').textContent = new Date().toISOString().slice(0,10);
+    </script>
+  </body>
+  </html>
