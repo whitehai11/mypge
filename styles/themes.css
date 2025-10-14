@@ -1,0 +1,13 @@
+/* CLI theme overrides (lightweight) */
+
+:root { --accent-1: #a855f7; --accent-2: #38bdf8; --accent-3: #10b981; --text: #e5eef8; }
+
+.theme-neon :root {}
+.theme-neon .gradient-text { text-shadow: 0 0 14px rgba(56,189,248,.45); }
+
+.theme-void :root { --accent-1:#0ea5e9; --accent-2:#22c55e; --accent-3:#7c3aed; --text:#cbd5e1; }
+.theme-void body { background-color: #07090c; }
+
+.theme-classic :root { --accent-1:#22d3ee; --accent-2:#a3e635; --accent-3:#f97316; --text:#e2e8f0; }
+.theme-classic body { background-color: #0b0f14; }
+
