@@ -209,14 +209,16 @@ export function initTerminal() {
     }
     if (!hit) return false;
     if (hit.name === 'matrix') {
-      const mod = await import(hit.module);
+      const path = `./cli/commands/${String(hit.module).replace(/^\.\//,'')}`;
+      const mod = await import(path);
       // Provide holder for stop control
       matrixHolder = { matrix: null };
       mod.bind?.(matrixHolder);
       await mod.run(c, makeCtx());
       return true;
     }
-    const mod = await import(hit.module);
+    const path = `./cli/commands/${String(hit.module).replace(/^\.\//,'')}`;
+    const mod = await import(path);
     await mod.run(c, makeCtx());
     return true;
   }
@@ -246,6 +248,7 @@ export function initTerminal() {
     await typeLines(state.body, ['Opening vault...'], speed);
     const mod = await import('./secretVault.js');
     mod.openVault({ config });
+    try { const a = await import('./achievements.js'); a.unlockAchievement('vault_access'); } catch(_){ }
   }
 
   async function run(cmd) {
@@ -321,4 +324,3 @@ export function initTerminal() {
 
 // Auto init
 initTerminal();
-

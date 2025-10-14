@@ -11,6 +11,7 @@ export async function run(input, ctx) {
   if (chatMode) return;
   chatMode = true;
   await ctx.typeLines(['[chat] enter your message (type: exit chat)'], 28);
+  try { const a = await import('../../achievements.js'); a.unlockAchievement('chat_used'); } catch(_){ }
   ctx.bindMode({
     name: 'chat',
     onInput: async (line) => {
@@ -23,4 +24,3 @@ export async function run(input, ctx) {
     },
   });
 }
-

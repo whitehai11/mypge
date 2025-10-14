@@ -7,8 +7,8 @@ export async function run(input, ctx) {
   if (cmd === 'resume') return resume(ctx);
 
   const tracks = [
-    'Vibin-chosic.com_.mp3', // existing file in root as fallback
-    // You can add more under /assets/audio/ and list here
+    'assets/audio/lofi1.mp3',
+    'Vibin-chosic.com_.mp3',
   ];
   const src = tracks[(Math.random()*tracks.length)|0];
 
@@ -25,4 +25,3 @@ export async function run(input, ctx) {
 
 async function pause(ctx){ if (player && !player.paused){ player.pause(); await ctx.typeLines(['[audio] ⏸ paused'], 28);} }
 async function resume(ctx){ if (player && player.paused){ try{ await player.play(); }catch(_){ } await ctx.typeLines(['[audio] ▶ resumed'], 28);} }
-

@@ -24,6 +24,6 @@ export async function run(input, ctx) {
   await ctx.typeLines(['[fatal] system meltdown detected','reboot required'], 24);
   const mod = await import('./reboot.js');
   await mod.run('', ctx);
+  try { const a = await import('../../achievements.js'); a.unlockAchievement('meltdown'); } catch(_){ }
 }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
-

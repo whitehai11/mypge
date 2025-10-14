@@ -15,9 +15,28 @@
     <link rel="stylesheet" href="assets/styles.css" />
     <link rel="stylesheet" href="styles/terminal.css" />
     <link rel="stylesheet" href="styles/themes.css" />
+    <link rel="stylesheet" href="styles/achievements.css" />
     <link rel="stylesheet" href="styles/secretVault.css" />
   </head>
   <body>
+    <!-- Theme Switcher Dropdown -->
+    <div class="theme-switch" aria-label="Theme Auswahl">
+      <button id="theme-toggle" class="theme-btn" aria-haspopup="true" aria-expanded="false" title="Theme wechseln">
+        <span class="dot"></span>
+        <span id="theme-label">Theme</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+      <div id="theme-menu" class="theme-menu" role="menu" aria-hidden="true">
+        <button data-theme="classic" role="menuitem">Classic</button>
+        <button data-theme="neon" role="menuitem">Neon</button>
+        <button data-theme="void" role="menuitem">Void</button>
+        <button data-theme="retro" role="menuitem">Retro</button>
+        <button data-theme="solarized" role="menuitem">Solarized</button>
+        <button data-theme="glass" role="menuitem">Glass</button>
+        <button data-theme="carbon" role="menuitem">Carbon</button>
+        <button data-theme="light" role="menuitem">Light</button>
+      </div>
+    </div>
     <!-- Vollbild-Video-Hintergrund (loop, autoplay, muted) -->
     <div class="video-bg" aria-hidden="true">
       <video class="bg-video" muted loop playsinline preload="none" data-src="4216715-uhd_3840_2160_25fps.mp4"></video>
@@ -61,7 +80,7 @@
         </div>
 
         <footer class="footer">
-          <p>© <span id="y"></span> Maro • <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a></p>
+          <p>© <span id="y"></span> Maro • <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a> • <a href="achievements.html">Achievements</a></p>
         </footer>
       </div>
     </main>
@@ -73,5 +92,6 @@
     <script type="module" src="assets/lazy.js"></script>
     <script type="module" src="assets/main.js"></script>
     <script type="module" src="components/terminal.js"></script>
+    <script type="module" src="components/devOverlay.js"></script>
   </body>
   </html>

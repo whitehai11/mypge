@@ -210,3 +210,37 @@ body {
 .steam-inline { margin-left: auto; display: flex; align-items: center; gap: 8px; min-width: 0; }
 .steam-inline .steam-game { max-width: 10rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .steam-inline .steam-hours { font-size: 11px; color: var(--text-muted); }
+
+/* Theme dropdown (glass style) */
+.theme-switch { position: fixed; top: 16px; right: 16px; z-index: 1002; }
+.theme-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  color: var(--text);
+  backdrop-filter: blur(8px) saturate(1.1);
+  box-shadow: var(--glass-shadow);
+  cursor: pointer; font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+.theme-btn:hover { border-color: rgba(0,255,200,.45); }
+.theme-btn .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--term-accent, var(--accent)); box-shadow: 0 0 10px rgba(0,255,200,.35); }
+.theme-btn .chev { width: 16px; height: 16px; opacity: .8; }
+
+.theme-menu {
+  position: absolute; top: calc(100% + 6px); right: 0; min-width: 180px;
+  padding: 6px; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(10px) saturate(1.1);
+  display: none;
+  transform-origin: top right; transform: scale(.98); opacity: 0;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.theme-menu.open { display: block; transform: scale(1); opacity: 1; }
+.theme-menu button {
+  width: 100%; text-align: left; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid transparent; background: transparent; color: var(--text);
+  font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; cursor: pointer;
+}
+.theme-menu button:hover { border-color: rgba(0,255,200,.35); }

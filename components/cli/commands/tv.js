@@ -45,5 +45,5 @@ export async function run(input, ctx) {
     }
   }
   step();
+  try { const a = await import('../../achievements.js'); a.unlockAchievement('tv_watched'); } catch(_){ }
 }
-
