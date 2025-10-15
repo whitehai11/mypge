@@ -26,7 +26,7 @@ Terminal Commands (high level)
 - `chat` — minimal local chat; `exit chat` to leave
 - `mood` — random system mood line
 - `timewarp` — glitch + jump 50 years
-- `trace gothlab.dev` — fake route trace
+- `trace example.net` — fake route trace
 - `theme <name>` — switch styles (neon|void|retro|solarized|glass|carbon|light|classic)
 - `reboot` — fake boot splash
 - `rm -rf /` — self‑destruct then reboot

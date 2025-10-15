@@ -10,7 +10,7 @@ export async function run(input, ctx) {
   ];
   await ctx.typeLines(logo, 10);
   const lines = [
-    'Loading Gothlab Core v2.3',
+    'Loading Core v2.3',
     'Initializing neural subsystems...',
     'Verifying boot integrity...',
   ];

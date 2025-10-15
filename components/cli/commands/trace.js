@@ -1,5 +1,5 @@
 export async function run(input, ctx) {
-  const target = input.split(/\s+/).slice(1).join(' ') || 'gothlab.dev';
+  const target = input.split(/\s+/).slice(1).join(' ') || 'example.net';
   await ctx.typeLines([`tracing route to ${target}...`], 24);
   const hops = [
     '192.168.0.1', '10.21.32.4', '172.16.40.12', target

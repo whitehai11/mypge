@@ -205,6 +205,9 @@ body {
 .steam-inline .steam-game { max-width: 10rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .steam-inline .steam-hours { font-size: 11px; color: var(--text-muted); }
 
+/* Hide X/Twitter link in linktree */
+.links a[href^="https://x.com"] { display: none !important; }
+
 .theme-switch { position: fixed; top: 16px; right: 16px; z-index: 1002; }
 .theme-btn {
   display: inline-flex; align-items: center; gap: 8px;

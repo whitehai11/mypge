@@ -153,7 +153,7 @@ export function initTerminal() {
       }
     } catch(_){}
     await typeLines(state.body, ['initializing maro.run ...'], speed); await wait(1000);
-    await typeLines(state.body, ['connecting to gothlab systems ...'], speed); await wait(1000);
+    await typeLines(state.body, ['connecting to systems ...'], speed); await wait(1000);
     await typeLines(state.body, ['online.'], speed);
   }
   function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
