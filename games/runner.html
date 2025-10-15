@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Runner</title><link rel="stylesheet" href="../assets/styles.css"/></head>
+<body><main class="page"><div class="container" style="align-items:stretch;max-width:820px;">
+<h1 class="name"><span class="gradient-text">Runner</span></h1>
+<section class="card"><canvas id="c" width="480" height="260" class="vgame" style="width:100%;height:260px;display:block"></canvas><div class="muted">Space/W to jump</div></section>
+<footer class="footer"><p>© <span id="y"></span> Maro</p></footer></div></main>
+<script type="module">
+import { unlockAchievement } from '../components/achievements.js'; unlockAchievement('runner_dash');
+document.getElementById('y').textContent = new Date().getFullYear();
+const c=document.getElementById('c'),x=c.getContext('2d'); let w=c.width,h=c.height; let y=h-20, vy=0, onGround=true; let obs=[], t=0, alive=true, score=0;
+function add(){ obs.push({x:w, y:h-20, w:10}); }
+function step(){ if(!alive) return; t++; if(t%70===0) add(); vy+=0.4; y+=vy; if(y>h-20){ y=h-20; vy=0; onGround=true; } x.clearRect(0,0,w,h); x.fillStyle='rgba(0,0,0,.2)'; x.fillRect(0,0,w,h); x.fillStyle='#00ffc8'; x.fillRect(30, y-10, 10, 10); x.fillStyle='#aee7df';
+  obs.forEach(o=>{ o.x-=3; x.fillRect(o.x,o.y-10,o.w,10); if(o.x<40 && o.x+o.w>30 && y>h-30) alive=false; }); obs=obs.filter(o=>o.x>-20); x.fillText('Score '+(score++),6,14); requestAnimationFrame(step); }
+function start(){ window.addEventListener('keydown', e=>{ if((e.code==='Space'||e.key==='w'||e.key==='W') && onGround){ vy=-7; onGround=false; } }); step(); }
+window.addEventListener('terminal:interrupt', ()=>{ alive=false; });
+const fs=document.createElement('div'); fs.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:1005;color:#e5eef8;font:14px ui-monospace;'; fs.innerHTML='<div class="card" style="padding:12px 16px">Click to enter fullscreen and play</div>'; document.body.appendChild(fs); fs.addEventListener('click', async ()=>{ try{ await document.documentElement.requestFullscreen?.(); }catch(_){} fs.remove(); start(); });
+ </script>
+ <script type="module" src="../assets/version.js"></script>
+ </body></html>

@@ -57,3 +57,18 @@ initCursorEffect();
     }
   });
 })();
+
+// Hidden Games index opener (Alt+G from anywhere)
+window.addEventListener('keydown', (e)=>{
+  if (e.altKey && String(e.key).toLowerCase() === 'g') {
+    try { e.preventDefault(); } catch(_) {}
+    const url = 'games/index.html?show=1';
+    if (window.location.pathname.endsWith('/games/index.html')) {
+      // If already on the page, just reveal via hash
+      const list = document.getElementById('games-list');
+      if (list) list.style.display = 'block';
+    } else {
+      window.open(url, '_blank');
+    }
+  }
+});

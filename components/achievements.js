@@ -1,6 +1,6 @@
 const KEY = 'achievements';
 const VER_KEY = 'achievements_version';
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 const DEFAULTS = [
   { id:'matrix_mode', name:'Matrix Initiated', description:'Entered the Matrix mode for the first time.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/matrix.svg', dateUnlocked:null },
@@ -9,12 +9,24 @@ const DEFAULTS = [
   { id:'theme_switch', name:'Chameleon', description:'Switched the site theme.', category:'System', unlocked:false, icon:'assets/icons/theme.svg', dateUnlocked:null },
   { id:'chat_used', name:'Small Talk', description:'Used the chat command.', category:'Fun', unlocked:false, icon:'assets/icons/chat.svg', dateUnlocked:null },
   { id:'tv_watched', name:'Broadcast Viewer', description:'Watched ASCII TV.', category:'Media', unlocked:false, icon:'assets/icons/tv.svg', dateUnlocked:null },
+  { id:'snake_master', name:'Snake Master', description:'Played the Snake mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'flappy_pilot', name:'Flappy Pilot', description:'Played the Flappy mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'pong_player', name:'Pong Player', description:'Played the Pong mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'tetris_stack', name:'Tetris Stack', description:'Played the Tetris mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'breakout_smash', name:'Breakout Smash', description:'Played the Breakout mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'dodge_runner', name:'Dodge Runner', description:'Played the Dodge mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'memory_solver', name:'Memory Solver', description:'Played the Memory mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'runner_dash', name:'Runner Dash', description:'Played the Runner mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'shooter_arcade', name:'Shooter Arcade', description:'Played the Shooter mini game.', category:'Easter Eggs', unlocked:false, icon:'assets/icons/secret.svg', dateUnlocked:null },
+  { id:'full_completion', name:'Completionist', description:'Unlocked all achievements (100%).', category:'Meta', unlocked:false, icon:'assets/icons/theme.svg', dateUnlocked:null },
 ];
 
 export function initAchievements(){
   try{
     const ver = localStorage.getItem(VER_KEY);
     let list = JSON.parse(localStorage.getItem(KEY) || '[]');
+    list = Array.isArray(list) ? list : [];
+    list = list.filter(a => a && typeof a.id === 'string' && !/^egg_\d+$/.test(a.id));
     const have = new Set(list.map(a=>a.id));
     DEFAULTS.forEach(d=>{ if(!have.has(d.id)) list.push(d); });
     localStorage.setItem(KEY, JSON.stringify(list));
@@ -43,6 +55,7 @@ export function unlockAchievement(id){
   saveAchievements(list);
   showToast(a);
   notifyUpdate({ type:'unlock', id });
+  if (id !== 'full_completion') checkFullCompletion();
   return true;
 }
 
@@ -90,4 +103,17 @@ try { bc = new BroadcastChannel('achievements'); } catch(_) { bc = null; }
 function notifyUpdate(payload){
   try{ if (bc) bc.postMessage(payload); }catch(_){ }
   try{ window.dispatchEvent(new CustomEvent('achievements:updated', { detail: payload })); }catch(_){ }
+}
+
+function checkFullCompletion(){
+  const list = getAchievements();
+  const allOthersUnlocked = list.filter(a=>a.id!=='full_completion').every(a=>a.unlocked);
+  const comp = list.find(a=>a.id==='full_completion');
+  if (allOthersUnlocked && comp && !comp.unlocked){
+    comp.unlocked = true;
+    comp.dateUnlocked = new Date().toISOString();
+    saveAchievements(list);
+    showToast(comp);
+    notifyUpdate({ type:'unlock', id:'full_completion' });
+  }
 }
