@@ -2,7 +2,6 @@ let player;
 let ui;
 
 export async function run(input, ctx) {
-  // Accept: "play lo-fi" or "play lofi"
   const cmd = input.trim().toLowerCase();
   if (cmd === 'pause') return pause(ctx);
   if (cmd === 'resume') return resume(ctx);
@@ -30,7 +29,6 @@ function ensurePlayer(){
   player.loop = true;
   player.preload = 'metadata';
   player.volume = 0.6;
-  // Stop on terminal interrupt
   try {
     window.addEventListener('terminal:interrupt', () => { player?.pause(); updateUI(); });
   } catch(_){ }
@@ -65,5 +63,4 @@ function updateUI(){
   if (player) ui.vol.value = String(player.volume);
 }
 
-// Optional: external stop
 export function stop(){ try{ player?.pause(); }catch(_){ } }

@@ -18,4 +18,3 @@ export async function run(input, ctx) {
   await ctx.typeLines(['System online.'], 24);
 }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
-

@@ -1,5 +1,4 @@
 export async function run(input, ctx) {
-  // Add glitch class
   const termWin = document.querySelector('.terminal-window');
   termWin?.classList.add('tw-glitch');
   setTimeout(()=> termWin?.classList.remove('tw-glitch'), 3000);
@@ -11,4 +10,3 @@ export async function run(input, ctx) {
 }
 
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
-

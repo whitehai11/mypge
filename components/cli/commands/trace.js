@@ -12,4 +12,3 @@ export async function run(input, ctx) {
   await ctx.typeLines(['latency spikes detected.', 'trace complete.'], 24);
 }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
-

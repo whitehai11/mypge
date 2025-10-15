@@ -1,6 +1,3 @@
-// Secret Easter Egg Vault (lazy-loaded)
-// No external libs. Ensure cleanup on close. Small, modular features.
-
 let overlay, panel, nav, content, focusables = [], lastFocused = null;
 let audioCtx = null;
 let currentTheme = null;
@@ -29,7 +26,6 @@ function unlock(name) {
 }
 
 function setTheme(name, persist) {
-  // Remove previous theme class
   if (currentTheme) document.documentElement.classList.remove('theme-'+currentTheme);
   currentTheme = name;
   if (name) document.documentElement.classList.add('theme-'+name);
@@ -58,10 +54,10 @@ function makeAsciiGallery() {
 \\_\\   \\_\   \:::/  \\_\\ \\____/ 
 `,
 `          
-   \\   //
+   \\   
     \\_//  Tron Grid
-    //\\
-   //  \\
+    \\
+   \\  \\
 `
   ];
   arts.forEach(a=>{ const pre=el('pre','ascii-block'); pre.textContent=a; wrap.appendChild(pre); });
@@ -129,11 +125,9 @@ function makeHiddenLinks(cfg) {
 
 function makeGames() {
   const wrap = el('div','grid cols-2');
-  // Snake minimal
   const snakeCanvas = document.createElement('canvas'); snakeCanvas.className='vgame';
   wrap.appendChild(snakeCanvas);
   snake(snakeCanvas);
-  // Tetris-lite placeholder (very minimal falling blocks)
   const tCanvas = document.createElement('canvas'); tCanvas.className='vgame';
   wrap.appendChild(tCanvas);
   tetrisLite(tCanvas);
@@ -215,9 +209,7 @@ function buildUI(cfg){
 
   function onClose(){
     overlay.classList.remove('active');
-    // cleanup canvases/listeners
     content.querySelectorAll('canvas.vgame').forEach(c=> c._destroy && c._destroy());
-    // restore focus
     if (lastFocused) lastFocused.focus();
   }
   closeB.addEventListener('click', onClose);
@@ -225,7 +217,6 @@ function buildUI(cfg){
   window.addEventListener('keydown', (e)=>{ if (overlay.classList.contains('active') && e.key==='Escape') onClose(); });
   window.addEventListener('keydown', trapFocus);
 
-  // focusables
   focusables = Array.from(panel.querySelectorAll('button, [href], select, textarea, [tabindex]:not([tabindex="-1"])'));
   lastFocused = document.activeElement;
   focusables[0]?.focus();
@@ -238,4 +229,3 @@ export function openVault({ config }){
   overlay.classList.add('active');
   unlock('Typed sudo secret');
 }
-

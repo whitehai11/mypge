@@ -1,6 +1,3 @@
-// Achievements system: localStorage only, with toast notifications
-// Data format versioning to allow additive updates
-
 const KEY = 'achievements';
 const VER_KEY = 'achievements_version';
 const VERSION = '1.0.0';
@@ -18,7 +15,6 @@ export function initAchievements(){
   try{
     const ver = localStorage.getItem(VER_KEY);
     let list = JSON.parse(localStorage.getItem(KEY) || '[]');
-    // Add missing defaults without removing user data
     const have = new Set(list.map(a=>a.id));
     DEFAULTS.forEach(d=>{ if(!have.has(d.id)) list.push(d); });
     localStorage.setItem(KEY, JSON.stringify(list));
@@ -87,10 +83,8 @@ export function showToast(ach){
   setTimeout(()=>{ item.classList.remove('show'); setTimeout(()=> item.remove(), 300); }, 2600);
 }
 
-// Immediately initialize on module load
 initAchievements();
 
-// Broadcast updates so other tabs/pages can re-render
 let bc = null;
 try { bc = new BroadcastChannel('achievements'); } catch(_) { bc = null; }
 function notifyUpdate(payload){

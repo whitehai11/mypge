@@ -1,9 +1,7 @@
 import { config } from './config.js';
 
-// Neon cursor tail effect (Canvas-based, lightweight)
 export function initCursorEffect() {
   if (!config.cursor?.enabled) return;
-  // Disable on touch/pointer coarse devices
   const coarse = window.matchMedia('(pointer: coarse)').matches;
   if (coarse || 'ontouchstart' in window) return;
 
@@ -43,7 +41,7 @@ export function initCursorEffect() {
 
   let last = performance.now();
   function tick(now) {
-    const dt = Math.min(32, now - last); // cap delta
+    const dt = Math.min(32, now - last);
     last = now;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -78,7 +76,6 @@ export function initCursorEffect() {
     vx = (x - px);
     vy = (y - py);
     px = x; py = y;
-    // Smaller velocity yields fewer particles; clamp
     const speed = Math.hypot(vx, vy) || 1;
     const count = Math.min(3, Math.max(1, Math.floor(speed / 12)));
     for (let i = 0; i < count; i++) {
@@ -90,7 +87,5 @@ export function initCursorEffect() {
   window.addEventListener('mousemove', onMove, { passive: true });
   requestAnimationFrame(tick);
 
-  // Hide native cursor when effect active
   document.documentElement.style.cursor = 'none';
 }
-

@@ -60,7 +60,6 @@
       }
       filter.addEventListener('change', render);
       reset.addEventListener('click', ()=>{ if (confirm('Reset all achievements?')) { resetAchievements(); render(); }});
-      // Re-render on storage updates or broadcast
       window.addEventListener('storage', (e)=>{ if (e.key==='achievements') render(); });
       try { const bc = new BroadcastChannel('achievements'); bc.onmessage = ()=> render(); } catch(_){ }
       window.addEventListener('achievements:updated', render);

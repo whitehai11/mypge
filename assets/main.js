@@ -1,6 +1,5 @@
 import { initCursorEffect } from './cursor.js';
 
-// Apply stored theme early
 try {
   const saved = localStorage.getItem('maro_theme_cli');
   const clsList = ['theme-neon','theme-void','theme-retro','theme-solarized','theme-glass','theme-carbon','theme-light','theme-classic'];
@@ -13,10 +12,8 @@ try {
   }
 } catch(_){}
 
-// Initialize neon cursor
 initCursorEffect();
 
-// Theme dropdown logic
 (function(){
   const btn = document.getElementById('theme-toggle');
   const menu = document.getElementById('theme-menu');
@@ -37,7 +34,6 @@ initCursorEffect();
     label.textContent = `Theme: ${name}`;
   }
 
-  // Initialize label from storage
   try { const s = localStorage.getItem('maro_theme_cli') || 'classic'; label.textContent = `Theme: ${s}`; } catch(_){ }
 
   function open(){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); document.addEventListener('click', onDocClick); document.addEventListener('keydown', onKey); }
@@ -50,12 +46,10 @@ initCursorEffect();
     b.addEventListener('click', ()=>{ const t=b.dataset.theme; if (t && themes.includes(t)) { setTheme(t); close(); } });
   });
 
-  // Keep dropdown label in sync with CLI/dev overlay changes
   window.addEventListener('theme:changed', (e)=>{
     const name = e.detail?.name || 'classic';
     label.textContent = `Theme: ${name}`;
   });
-  // Also react to cross-tab changes
   window.addEventListener('storage', (e)=>{
     if (e.key === 'maro_theme_cli') {
       const name = e.newValue || 'classic';

@@ -16,6 +16,5 @@ export async function run(input, ctx) {
   try { localStorage.setItem('maro_theme_cli', name); } catch(_){ }
   await ctx.typeLines([`[theme] switched to ${name}`], 24);
   try { const a = await import('../../achievements.js'); a.unlockAchievement('theme_switch'); } catch(_){ }
-  // Notify UI (e.g., dropdown) about theme change in this tab
   try { window.dispatchEvent(new CustomEvent('theme:changed', { detail: { name } })); } catch(_){ }
 }

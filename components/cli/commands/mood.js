@@ -10,4 +10,3 @@ export async function run(input, ctx) {
   const m = moods[(Math.random()*moods.length)|0];
   await ctx.typeLines([`[system] current mood: ${m}.`], 28);
 }
-

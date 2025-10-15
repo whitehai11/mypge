@@ -1,12 +1,10 @@
-// Hidden Dev Overlay (Ctrl + D). Vanilla JS, glass panel with tabs
-
 const BUILD_VERSION = '1.0.0';
 let overlay = null; let panel = null; let open = false; let fps=0; let fpsInt=null; let start = performance.now();
 
 function el(tag, cls, txt){ const e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
 
 function build(){
-  overlay = el('div','vault-overlay'); // reuse glass overlay style
+  overlay = el('div','vault-overlay');
   panel = el('div','vault-panel');
   const header = el('div','vault-header');
   header.append(el('div','vault-title','[dev overlay active]'));
@@ -32,7 +30,6 @@ function build(){
   function renderConsole(){
     const wrap = el('div');
     const pre = el('pre','ascii-block');
-    // Extract recent terminal commands from stored lines
     let lines=[]; try{ const saved = JSON.parse(localStorage.getItem('maro_term')||'null'); lines = saved?.lines||[]; }catch(_){ }
     const cmds = lines.filter(l=>l.startsWith('maro@run:~$ ')).slice(-30);
     pre.textContent = cmds.join('\n');
@@ -78,7 +75,6 @@ function build(){
     ];
     const pre = el('pre','ascii-block'); pre.textContent = list.join('\n');
     wrap.appendChild(pre);
-    // Update FPS line
     open = true; startFps();
     const int = setInterval(()=>{ pre.textContent = list.join('\n').replace('<live>', String(fps)); if(!open) clearInterval(int); }, 500);
     return wrap;

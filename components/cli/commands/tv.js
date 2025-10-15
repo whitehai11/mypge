@@ -1,4 +1,3 @@
-// ASCII TV: render short video as ASCII for ~10s
 export async function run(input, ctx) {
   const srcs = [
     '4216715-uhd_3840_2160_25fps.mp4',
@@ -39,7 +38,7 @@ export async function run(input, ctx) {
     }
     pre.textContent = out;
     if (performance.now() - t0 < 10_000) {
-      setTimeout(step, 50); // ~20fps
+      setTimeout(step, 50);
     } else {
       running = false; video.pause(); pre.insertAdjacentText('beforebegin', '[tv] ');
       pre.insertAdjacentText('afterend', '\n[tv] broadcast finished');
@@ -47,7 +46,6 @@ export async function run(input, ctx) {
     }
   }
   step();
-  // Allow Ctrl+C interrupt
   onInterrupt = ()=>{ running=false; try{ video.pause(); }catch(_){ } try{ pre.remove(); }catch(_){ } };
   window.addEventListener('terminal:interrupt', onInterrupt);
   try { const a = await import('../../achievements.js'); a.unlockAchievement('tv_watched'); } catch(_){ }

@@ -1,6 +1,5 @@
-// Terminal overlay and command router (client-side only)
 import { config } from '../assets/config.js';
-const TYPE_SPEED_FACTOR = 0.6; // accelerate typewriter animations
+const TYPE_SPEED_FACTOR = 0.6;
 
 const title = 'maro@run:~$';
 const isMobile = matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
@@ -105,15 +104,14 @@ export function initTerminal() {
   const state = buildOverlay();
   const toggle = buildToggle();
 
-  const speed = 36; // ~30–50ms per char
+  const speed = 36;
   const history = [];
   let histIdx = -1;
   let buffer = '';
   let open = false;
-  let mode = null; // special input mode (e.g., chat)
+  let mode = null;
   let matrixHolder = { matrix: null };
 
-  // Mobile: read-only hint
   if (isMobile) {
     const ro = createEl('span', 'term-ro', 'read-only on mobile');
     state.overlay.querySelector('.terminal-header')?.appendChild(ro);
@@ -123,7 +121,6 @@ export function initTerminal() {
   function hide() { open = false; closeOverlay(state); }
   toggle.addEventListener('click', () => (open ? hide() : show()));
 
-  // Keyboard toggle Ctrl + `
   window.addEventListener('keydown', (e) => {
     if (e.ctrlKey && (e.code === 'Backquote' || e.key === '`')) {
       e.preventDefault();
@@ -131,7 +128,6 @@ export function initTerminal() {
     }
   });
 
-  // Input handling (custom buffer + blinking cursor)
   function syncInput() {
     state.text.textContent = buffer;
     state.cursor.classList.toggle('blink', buffer.length % 2 === 0);
@@ -145,7 +141,6 @@ export function initTerminal() {
     persistAdd(line);
   }
 
-  // Intro + session restore
   let introRan = false;
   async function runIntro(){
     if (introRan) return; introRan = true;
@@ -163,7 +158,6 @@ export function initTerminal() {
   }
   function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-  // Registry + dispatch
   let registry = null;
   async function loadCommands(){
     if (registry) return registry;
@@ -199,7 +193,7 @@ export function initTerminal() {
   }
 
   async function dispatch(c){
-    // quick audio controls
+    
     if (c === 'pause' || c === 'resume') { const m = await import('./cli/commands/music.js'); await m.run(c, makeCtx()); return true; }
     const reg = await loadCommands();
     let hit = reg.find(r => r.name === c);
@@ -212,7 +206,7 @@ export function initTerminal() {
     if (hit.name === 'matrix') {
       const path = `./cli/commands/${String(hit.module).replace(/^\.\//,'')}`;
       const mod = await import(path);
-      // Provide holder for stop control
+      
       matrixHolder = { matrix: null };
       mod.bind?.(matrixHolder);
       await mod.run(c, makeCtx());
@@ -255,10 +249,10 @@ export function initTerminal() {
   async function run(cmd) {
     const c = (cmd || '').trim();
     if (!c) return;
-    // echo command
+    
     await typeLines(state.body, [`${title} ${c}`], speed);
 
-    // matrix escape
+    
     if (c.toLowerCase() === 'exit matrix' && matrixHolder && matrixHolder.matrix && matrixHolder.matrix.stop) {
       matrixHolder.matrix.stop();
       matrixHolder = { matrix: null };
@@ -281,13 +275,12 @@ export function initTerminal() {
     }
   }
 
-  // keystroke handler
   window.addEventListener('keydown', async (e) => {
     if (!open) return;
     const ignore = ['Tab'];
     if (ignore.includes(e.key)) { e.preventDefault(); return; }
 
-    // Ctrl + C interrupt
+    
     if (e.ctrlKey && (e.key === 'c' || e.key === 'C')) {
       e.preventDefault();
       await typeLines(state.body, ['^C'], 18);
@@ -338,5 +331,5 @@ export function initTerminal() {
   });
 }
 
-// Auto init
+ 
 initTerminal();

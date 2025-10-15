@@ -1,4 +1,3 @@
-/* Achievements UI (toast + grid) */
 
 .achv-toasts { position: fixed; right: 16px; bottom: 16px; z-index: 1200; display: flex; flex-direction: column; gap: 8px; }
 .achv-toast {
@@ -16,7 +15,6 @@
 .achv-name { font-weight: 700; margin-top: 4px; }
 .achv-desc { opacity: .9; }
 
-/* Grid page */
 .achievements-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); }
 .achievement { border: 1px solid var(--border, rgba(255,255,255,.16)); border-radius: 12px; padding: 12px; background: var(--glass-bg, rgba(10,10,10,.85)); box-shadow: var(--glass-shadow, 0 8px 24px rgba(0,0,0,.4)); text-align: left; }
 .achievement h3 { margin: 6px 0; font-size: 1rem; }
@@ -29,4 +27,3 @@
 .achv-controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom: 10px; }
 .achv-controls select, .achv-controls button { padding: 6px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--glass-bg); color: var(--text); cursor: pointer; }
 .achv-controls button:hover { border-color: rgba(0,255,200,.4); }
-

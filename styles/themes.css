@@ -1,15 +1,10 @@
-/* Theme system: add class to <body> or :root like 'theme-neon'.
-   Uses CSS variables to recolor the existing UI without DOM changes. */
 
-/* Smooth color/background transitions */
 body, .card, .link, .avatar, .terminal-window, .terminal-overlay, .vault-panel {
   transition: background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease, filter .3s ease;
 }
 
-/* Defaults (base already defines some; keep here to ensure availability) */
 :root { --bg:#0b0f14; --text:#e5eef8; --muted:#aee7df; --accent:#00ffc8; }
 
-/* Neon */
 :root.theme-neon, body.theme-neon {
   --bg: #000000;
   --text: #ffffff;
@@ -32,7 +27,6 @@ body.theme-neon::before {
   filter: blur(40px);
 }
 
-/* Void */
 :root.theme-void, body.theme-void {
   --bg: #07090c;
   --text: #d7e2ea;
@@ -46,7 +40,6 @@ body.theme-neon::before {
 }
 body.theme-void .link:hover { box-shadow: none; transform: none; }
 
-/* Retro */
 :root.theme-retro, body.theme-retro {
   --bg: #001900;
   --text: #00ff00;
@@ -65,7 +58,6 @@ body.theme-retro::after {
   background: repeating-linear-gradient( to bottom, rgba(0,255,0,0.05), rgba(0,255,0,0.05) 1px, transparent 3px, transparent 4px );
 }
 
-/* Solarized Dark */
 :root.theme-solarized, body.theme-solarized {
   --bg: #002b36;
   --text: #839496;
@@ -78,7 +70,6 @@ body.theme-retro::after {
   --term-accent: #b58900;
 }
 
-/* Glass */
 :root.theme-glass, body.theme-glass {
   --bg: #03060a;
   --text: #e7f6ff;
@@ -91,7 +82,6 @@ body.theme-retro::after {
   --term-accent: #9b87f5;
 }
 
-/* Carbon */
 :root.theme-carbon, body.theme-carbon {
   --bg: #121212;
   --text: #f1f5f9;
@@ -104,7 +94,6 @@ body.theme-retro::after {
   --term-accent: #ff5555;
 }
 
-/* Minimal Light (Easter egg: theme light) */
 :root.theme-light, body.theme-light {
   --bg: #ffffff;
   --text: #0a0a0a;
@@ -118,4 +107,3 @@ body.theme-retro::after {
 }
 body.theme-light *, body.theme-light *::before, body.theme-light *::after { animation: none !important; }
 body.theme-light .link:hover { box-shadow: none; transform: none; }
-

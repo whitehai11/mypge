@@ -1,7 +1,7 @@
 Maro Personal Homepage
 
 Overview
-- Static, fast personal site (guns.lol / maro.run style) with a glass UI.
+- Static, fast personal site (guns.lol style) with a glass UI.
 - Optional Terminal Overlay with commands, themes, mini‑apps, and Easter Eggs.
 - Achievements with local storage and live notifications; overview page included.
 - Hidden Dev Overlay for power users (performance and config info).

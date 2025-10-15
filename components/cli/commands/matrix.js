@@ -29,7 +29,6 @@ export async function run(input, ctx) {
   }
   step();
 
-  // Stop logic (Esc key)
   function stop(){
     if (!running) return;
     cancelAnimationFrame(raf);
@@ -41,12 +40,10 @@ export async function run(input, ctx) {
   function onKey(e){ if (e.key === 'Escape') stop(); }
   window.addEventListener('keydown', onKey);
 
-  // expose stop for terminal (optional)
   ctxState.matrix = { stop };
   await ctx.typeLines(['[matrix] press Esc to exit'], 28);
   try { const a = await import('../../achievements.js'); a.unlockAchievement('matrix_mode'); } catch(_){ }
 }
 
-// ctxState is injected by terminal
 let ctxState = {};
 export function bind(state){ ctxState = state; }
