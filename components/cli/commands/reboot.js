@@ -1,4 +1,5 @@
 export async function run(input, ctx) {
+  try { window.dispatchEvent(new CustomEvent('terminal:interrupt')); } catch(_){}
   ctx.body.innerHTML = '';
   const logo = [
     '   __  __             ____             ',
@@ -16,5 +17,6 @@ export async function run(input, ctx) {
   for (const l of lines){ await ctx.typeLines([l], 28); await wait(600);} 
   await wait(1200);
   await ctx.typeLines(['System online.'], 24);
+  await ctx.typeLines(['Maro interactive shell - type `help` to begin'], 24);
 }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }

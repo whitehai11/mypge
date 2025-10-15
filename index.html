@@ -86,7 +86,19 @@
     </main>
 
     <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
+      (function(){
+        try { document.title = 'Maro - Home'; } catch(_) {}
+        var y = new Date().getFullYear();
+        var fp = document.querySelector('footer.footer p');
+        if (fp) {
+          fp.innerHTML = '(c) ' + y + ' Maro . ' +
+            '<a href="impressum.html">Impressum</a> . ' +
+            '<a href="datenschutz.html">Datenschutz</a> . ' +
+            '<a href="achievements.html">Achievements</a>';
+        } else {
+          var ys = document.getElementById('y'); if (ys) ys.textContent = y;
+        }
+      })();
     </script>
     <script type="module" src="assets/lazy.js"></script>
     <script type="module" src="assets/main.js"></script>

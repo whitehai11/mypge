@@ -193,14 +193,14 @@ export function initTerminal() {
   }
 
   async function dispatch(c){
-    
-    if (c === 'pause' || c === 'resume') { const m = await import('./cli/commands/music.js'); await m.run(c, makeCtx()); return true; }
+    const cl = c.toLowerCase();
+    if (cl === 'pause' || cl === 'resume') { const m = await import('./cli/commands/music.js'); await m.run(cl, makeCtx()); return true; }
     const reg = await loadCommands();
-    let hit = reg.find(r => r.name === c);
+    let hit = reg.find(r => String(r.name || '').toLowerCase() === cl);
     if (!hit) {
-      if (c.startsWith('trace')) hit = reg.find(r=>r.name==='trace');
-      else if (c.startsWith('theme')) hit = reg.find(r=>r.name==='theme');
-      else if (c==='play lofi' || c==='play lo-fi') hit = reg.find(r=>r.name==='play lo-fi');
+      if (cl.startsWith('trace')) hit = reg.find(r=>r.name==='trace');
+      else if (cl.startsWith('theme')) hit = reg.find(r=>r.name==='theme');
+      else if (cl==='play lofi' || cl==='play lo-fi') hit = reg.find(r=>r.name==='play lo-fi');
     }
     if (!hit) return false;
     if (hit.name === 'matrix') {
