@@ -49,4 +49,17 @@ initCursorEffect();
   menu.querySelectorAll('button[data-theme]').forEach(b=>{
     b.addEventListener('click', ()=>{ const t=b.dataset.theme; if (t && themes.includes(t)) { setTheme(t); close(); } });
   });
+
+  // Keep dropdown label in sync with CLI/dev overlay changes
+  window.addEventListener('theme:changed', (e)=>{
+    const name = e.detail?.name || 'classic';
+    label.textContent = `Theme: ${name}`;
+  });
+  // Also react to cross-tab changes
+  window.addEventListener('storage', (e)=>{
+    if (e.key === 'maro_theme_cli') {
+      const name = e.newValue || 'classic';
+      label.textContent = `Theme: ${name}`;
+    }
+  });
 })();

@@ -1,5 +1,6 @@
 // Terminal overlay and command router (client-side only)
 import { config } from '../assets/config.js';
+const TYPE_SPEED_FACTOR = 0.6; // accelerate typewriter animations
 
 const title = 'maro@run:~$';
 const isMobile = matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
@@ -31,7 +32,7 @@ function typeLine(container, text, speed = 36) {
       line.textContent = text.slice(0, i++);
       container.scrollTop = container.scrollHeight;
       if (i <= text.length) {
-        setTimeout(tick, speed);
+        setTimeout(tick, Math.max(8, Math.floor(speed * TYPE_SPEED_FACTOR)));
       } else {
         persistAdd(line.textContent || '');
         resolve();
@@ -285,6 +286,21 @@ export function initTerminal() {
     if (!open) return;
     const ignore = ['Tab'];
     if (ignore.includes(e.key)) { e.preventDefault(); return; }
+
+    // Ctrl + C interrupt
+    if (e.ctrlKey && (e.key === 'c' || e.key === 'C')) {
+      e.preventDefault();
+      await typeLines(state.body, ['^C'], 18);
+      if (mode?.onInput) { mode = null; }
+      if (matrixHolder && matrixHolder.matrix && typeof matrixHolder.matrix.stop === 'function') {
+        matrixHolder.matrix.stop();
+        matrixHolder = { matrix: null };
+      }
+      try { window.dispatchEvent(new CustomEvent('terminal:interrupt')); } catch(_){}
+      buffer = '';
+      syncInput();
+      return;
+    }
 
     if (isMobile) {
       if (e.key === 'Escape') hide();

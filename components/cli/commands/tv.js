@@ -20,6 +20,7 @@ export async function run(input, ctx) {
   let running = true;
 
   const t0 = performance.now();
+  let onInterrupt;
   function step(){
     if (!running) return;
     const W = 120, H = 60;
@@ -42,8 +43,12 @@ export async function run(input, ctx) {
     } else {
       running = false; video.pause(); pre.insertAdjacentText('beforebegin', '[tv] ');
       pre.insertAdjacentText('afterend', '\n[tv] broadcast finished');
+      if (onInterrupt) window.removeEventListener('terminal:interrupt', onInterrupt);
     }
   }
   step();
+  // Allow Ctrl+C interrupt
+  onInterrupt = ()=>{ running=false; try{ video.pause(); }catch(_){ } try{ pre.remove(); }catch(_){ } };
+  window.addEventListener('terminal:interrupt', onInterrupt);
   try { const a = await import('../../achievements.js'); a.unlockAchievement('tv_watched'); } catch(_){ }
 }

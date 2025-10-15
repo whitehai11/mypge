@@ -244,3 +244,21 @@ body {
   font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; cursor: pointer;
 }
 .theme-menu button:hover { border-color: rgba(0,255,200,.35); }
+
+/* Music player (appears on play lo-fi) */
+.music-player {
+  position: fixed; right: 16px; bottom: 16px; z-index: 1002;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(10px) saturate(1.1);
+  color: var(--text);
+  min-width: 260px;
+}
+.music-player .mp-btn { border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 8px; padding: 6px 8px; cursor: pointer; }
+.music-player .mp-btn:hover { border-color: rgba(0,255,200,.4); }
+.music-player .mp-track { flex: 1; display: grid; gap: 6px; }
+.music-player .mp-title { font-size: 12px; color: var(--text-muted); }
+.music-player .mp-vol { width: 100%; accent-color: var(--term-accent, var(--accent)); }

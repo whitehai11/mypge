@@ -45,6 +45,7 @@ function build(){
     document.documentElement.classList.remove(...clsList); document.body.classList.remove(...clsList);
     if (name && name!=='classic'){ const cls='theme-'+name; document.documentElement.classList.add(cls); document.body.classList.add(cls); }
     try{ localStorage.setItem('maro_theme_cli', name);}catch(_){ }
+    try { window.dispatchEvent(new CustomEvent('theme:changed', { detail: { name } })); } catch(_){ }
   }
 
   function renderConfig(){
@@ -89,4 +90,3 @@ function build(){
 function toggle(){ if(!overlay) build(); overlay.classList.toggle('active'); open = overlay.classList.contains('active'); }
 
 document.addEventListener('keydown', (e)=>{ if (e.ctrlKey && String(e.key).toLowerCase()==='d'){ e.preventDefault(); toggle(); }});
-
