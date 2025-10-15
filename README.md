@@ -7,7 +7,6 @@ Overview
 - Hidden Dev Overlay for power users (performance and config info).
 
 Getting Started
-- No build needed. Open `index.html` in a browser or deploy to Vercel/Netlify.
 - All code is plain HTML/CSS/JS; no external libraries.
 
 Keyboard Shortcuts
