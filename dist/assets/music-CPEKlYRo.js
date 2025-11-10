@@ -1,0 +1,8 @@
+let e,n;async function m(t,a){const o=t.trim().toLowerCase();if(o==="pause")return c(a);if(o==="resume")return l(a);const s=["/assets/audio/lofi1.mp3","Vibin-chosic.com_.mp3"],u=s[Math.random()*s.length|0];r(),e.src=u;try{await e.play()}catch{}await a.typeLines([`[audio] now playing: "${u}"`],28),p(),i()}async function c(t){e&&!e.paused&&(e.pause(),await t.typeLines(["[audio] ⏸ paused"],28))}async function l(t){if(e&&e.paused){try{await e.play()}catch{}await t.typeLines(["[audio] ▶ resumed"],28)}}function r(){if(e)return e;e=new Audio,e.loop=!0,e.preload="metadata",e.volume=.6;try{window.addEventListener("terminal:interrupt",()=>{e?.pause(),i()})}catch{}return e}function p(){if(n&&document.body.contains(n.host))return;const t=document.createElement("div");t.className="music-player",t.innerHTML=`
+    <button class="mp-btn mp-toggle" aria-label="Play/Pause">▶</button>
+    <div class="mp-track">
+      <div class="mp-title">Lo‑Fi</div>
+      <input class="mp-vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume" />
+    </div>
+    <button class="mp-btn mp-close" aria-label="Close">✕</button>
+  `,document.body.appendChild(t);const a=t.querySelector(".mp-toggle"),o=t.querySelector(".mp-vol"),s=t.querySelector(".mp-close");a.addEventListener("click",()=>{r(),e.paused?e.play().then(i).catch(()=>{}):(e.pause(),i())}),o.addEventListener("input",()=>{r(),e.volume=Number(o.value)}),s.addEventListener("click",()=>{try{e.pause()}catch{}t.remove()}),n={host:t,toggle:a,vol:o}}function i(){n&&(e&&!e.paused?n.toggle.textContent="⏸":n.toggle.textContent="▶",e&&(n.vol.value=String(e.volume)))}function y(){try{e?.pause()}catch{}}export{m as run,y as stop};

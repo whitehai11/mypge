@@ -1,0 +1,57 @@
+[
+  {
+    "name": "ascii",
+    "desc": "generate daily procedural ASCII art",
+    "module": "./ascii.js"
+  },
+  {
+    "name": "play lo-fi",
+    "desc": "play a local lo-fi loop",
+    "module": "./music.js"
+  },
+  {
+    "name": "matrix",
+    "desc": "enter matrix rain mode",
+    "module": "./matrix.js"
+  },
+  {
+    "name": "mood",
+    "desc": "print a random system mood",
+    "module": "./mood.js"
+  },
+  {
+    "name": "timewarp",
+    "desc": "glitch and jump 50 years",
+    "module": "./timewarp.js"
+  },
+  {
+    "name": "chat",
+    "desc": "minimal local AI chat",
+    "module": "./chat.js"
+  },
+  {
+    "name": "tv",
+    "desc": "render a short video as ASCII",
+    "module": "./tv.js"
+  },
+  {
+    "name": "trace",
+    "desc": "simulate a network trace",
+    "module": "./trace.js"
+  },
+  {
+    "name": "theme",
+    "desc": "switch theme: neon|void|classic",
+    "module": "./theme.js"
+  },
+  {
+    "name": "reboot",
+    "desc": "fake boot screen",
+    "module": "./reboot.js"
+  },
+  {
+    "name": "rm -rf /",
+    "desc": "self destruct then reboot",
+    "module": "./selfdestruct.js"
+  }
+]

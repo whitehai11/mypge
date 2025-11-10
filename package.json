@@ -1,0 +1,36 @@
+{
+  "name": "mypge",
+  "version": "1.0.0",
+  "description": "Overview\r - Static personal Site\r - Optional Terminal Overlay with commands, themes, mini‑apps, and Easter Eggs.\r - Achievements with local storage and live notifications; overview page included.\r - Hidden Dev Overlay for power users (performance and config info).",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whitehai11/mypge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whitehai11/mypge/issues"
+  },
+  "homepage": "https://github.com/whitehai11/mypge#readme",
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react-swc": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2"
+  }
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Memory</title><link rel="stylesheet" href="../assets/styles.css"/></head>
+<body><main class="page"><div class="container" style="align-items:stretch;max-width:820px;">
+<h1 class="name"><span class="gradient-text">Memory</span></h1>
+<section class="card"><div id="grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px"></div><div class="muted">Click to match pairs (fullscreen required)</div></section>
+<footer class="footer"><p>© <span id="y"></span> Maro</p></footer></div></main>
+<script type="module">
+import { unlockAchievement } from '../components/achievements.js'; unlockAchievement('memory_solver');
+document.getElementById('y').textContent = new Date().getFullYear();
+const grid=document.getElementById('grid'); const vals=['A','A','B','B','C','C','D','D']; vals.sort(()=>Math.random()-0.5);
+let first=null, lock=false, done=0;
+function card(v){ const b=document.createElement('button'); b.textContent='?'; b.style.padding='16px'; b.style.border='1px solid var(--border)'; b.style.borderRadius='10px'; b.style.background='var(--glass-bg)'; b.dataset.v=v; b.addEventListener('click',()=>{
+  if(lock || b.classList.contains('ok')|| b===first) return; b.textContent=v; if(!first){ first=b; } else { lock=true; if(first.dataset.v===v){ first.classList.add('ok'); b.classList.add('ok'); done+=2; setTimeout(()=>{ lock=false; first=null; },300); } else { setTimeout(()=>{ first.textContent='?'; b.textContent='?'; first=null; lock=false; },500); } }
+}); return b; }
+function start(){ grid.innerHTML=''; vals.forEach(v=>grid.appendChild(card(v))); }
+const fs=document.createElement('div'); fs.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:1005;color:#e5eef8;font:14px ui-monospace;'; fs.innerHTML='<div class="card" style="padding:12px 16px">Click to enter fullscreen and play</div>'; document.body.appendChild(fs); fs.addEventListener('click', async ()=>{ try{ await document.documentElement.requestFullscreen?.(); }catch(_){} fs.remove(); start(); });
+window.addEventListener('terminal:interrupt', ()=>{ /* no-op */ });
+ </script>
+ <script type="module" src="../assets/version.js"></script>
+ </body></html>
