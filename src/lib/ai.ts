@@ -7,7 +7,7 @@ const DEFAULT_HEADERS = {
 
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const env = (import.meta && 'env' in import.meta ? (import.meta).env : {}) as Record<string, string | undefined>;
-const API_KEY = env.VITE_OPENROUTER_API_KEY || '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';
+const API_KEY = env.VITE_OPENROUTER_API_KEY;
 const REFERER = env.VITE_SITE_URL || 'https://maro.run';
 const TITLE = env.VITE_SITE_TITLE || 'Maro CLI';
 
