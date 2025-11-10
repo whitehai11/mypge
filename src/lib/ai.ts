@@ -11,7 +11,7 @@ const API_KEY = env.VITE_OPENROUTER_API_KEY;
 const REFERER = env.VITE_SITE_URL || 'https://maro.run';
 const TITLE = env.VITE_SITE_TITLE || 'Maro CLI';
 
-type ChatMessage = { role: string; content: string };
+export type ChatMessage = { role: 'system' | 'user' | 'assistant'; content: string };
 
 export async function sendNeonChat(messages: ChatMessage[]) {
   if (!API_KEY) {
